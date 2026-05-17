@@ -1,0 +1,20 @@
+[package]
+name = "music-player"
+version = "0.1.0"
+edition = "2021"
+description = "A modern TUI music player built with ratatui"
+
+[dependencies]
+ratatui = "0.29"
+crossterm = "0.28"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+chrono = "0.4"
+directories = "5"
+dirs = "5"
+rfd = "0.15"
+id3 = "1"
+notify = "7"
+unicode-width = "0.2"
+nix = { version = "0.29", features = ["signal"] }
