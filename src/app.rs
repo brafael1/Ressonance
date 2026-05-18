@@ -138,11 +138,6 @@ impl App {
         }
     }
 
-    pub fn change_volume(&mut self, delta: f32) {
-        self.state.volume = (self.state.volume + delta).clamp(0.0, 1.0);
-        self.audio.set_volume(self.state.volume);
-    }
-
     pub fn update_audio_state(&mut self) {
         if self.state.player_state == PlayerState::Playing {
             let elapsed = *self.audio.elapsed.blocking_lock();

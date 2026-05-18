@@ -5,5 +5,4 @@ pub enum AudioCommand {
     Pause,
     Resume,
     Stop,
-    SetVolume(f32),
 }

@@ -57,6 +57,4 @@ impl AudioState {
     pub fn stop(&self) {
         let _ = self.command_tx.send(AudioCommand::Stop);
     }
-
-    pub fn set_volume(&self, _volume: f32) {}
 }

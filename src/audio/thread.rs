@@ -80,7 +80,6 @@ pub fn audio_thread(
                     is_playing.store(false, Ordering::SeqCst);
                     *elapsed.blocking_lock() = Duration::ZERO;
                 }
-                AudioCommand::SetVolume(_) => {}
             },
             Err(_) => {
                 if let Some(ref mut p) = player {

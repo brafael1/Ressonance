@@ -17,8 +17,6 @@ pub fn render_footer(frame: &mut Frame, area: Rect, state: &AppState) {
         PlayerState::Stopped => "■ Stopped",
     };
 
-    let volume = format!("Vol: {:.0}%", state.volume * 100.0);
-
     let status_line = Line::from(vec![
         Span::styled(
             status,
@@ -27,10 +25,8 @@ pub fn render_footer(frame: &mut Frame, area: Rect, state: &AppState) {
                 .add_modifier(Modifier::BOLD),
         ),
         Span::raw(" | "),
-        Span::styled(&volume, Style::default().fg(Color::White)),
-        Span::raw(" | "),
         Span::styled(
-            "[q]uit [space]play [n]ext [p]rev [s]earch [a]dd [↑↓]vol [r]eload [enter]play",
+            "[q]uit [space]play [n]ext [p]rev [s]earch [a]dd [r]eload [enter]play",
             Style::default().fg(Color::DarkGray),
         ),
     ]);
