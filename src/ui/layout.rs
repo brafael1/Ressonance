@@ -23,15 +23,6 @@ pub fn compute_layout(area: Rect) -> AppLayout {
     }
 }
 
-pub fn compute_visualizer_area(area: Rect) -> Rect {
-    Rect {
-        x: 2,
-        y: area.height.saturating_sub(6),
-        width: area.width.saturating_sub(4),
-        height: 3,
-    }
-}
-
 pub fn split_main(area: Rect) -> (Rect, Rect) {
     let chunks = Layout::default()
         .direction(Direction::Horizontal)

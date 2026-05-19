@@ -14,9 +14,4 @@ pub fn render(frame: &mut Frame, state: &AppState) {
     components::render_now_playing(frame, np_area, state);
 
     components::render_footer(frame, layout.footer, state);
-
-    if state.player_state == crate::player::PlayerState::Playing {
-        let vis_area = layout::compute_visualizer_area(frame.area());
-        components::render_visualizer(frame, vis_area, state);
-    }
 }
