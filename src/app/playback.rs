@@ -65,4 +65,16 @@ impl App {
             self.state.set_status(format!("Playing: {}", name));
         }
     }
+
+    pub fn select_next(&mut self) {
+        if !self.state.playlist.is_empty() {
+            self.state.playlist.next();
+        }
+    }
+
+    pub fn select_previous(&mut self) {
+        if !self.state.playlist.is_empty() {
+            self.state.playlist.previous();
+        }
+    }
 }

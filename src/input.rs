@@ -43,6 +43,12 @@ impl App {
             KeyCode::Char('r') => {
                 self.reload_directory();
             }
+            KeyCode::Up => {
+                self.select_previous();
+            }
+            KeyCode::Down => {
+                self.select_next();
+            }
             KeyCode::Enter => {
                 if !self.state.playlist.is_empty() {
                     self.play_current();

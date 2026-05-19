@@ -26,7 +26,7 @@ pub fn render_footer(frame: &mut Frame, area: Rect, state: &AppState) {
         ),
         Span::raw(" | "),
         Span::styled(
-            "[q]uit [space]play [n]ext [p]rev [s]earch [a]dd [r]eload [enter]play",
+            "[q]uit [space]play [n]ext [p]rev [s]earch [a]dd [↑↓]select [r]eload [enter]play",
             Style::default().fg(Color::DarkGray),
         ),
     ]);
