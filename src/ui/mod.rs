@@ -14,4 +14,6 @@ pub fn render(frame: &mut Frame, state: &AppState) {
     components::render_now_playing(frame, np_area, state);
 
     components::render_footer(frame, layout.footer, state);
+
+    components::render_status_popup(frame, state);
 }

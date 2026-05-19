@@ -1,4 +1,4 @@
-use ratatui::layout::Rect;
+use ratatui::layout::{Constraint, Direction, Layout, Rect};
 use ratatui::style::{Color, Modifier, Style};
 use ratatui::text::{Line, Span};
 use ratatui::widgets::{Block, Borders, Paragraph};
@@ -38,9 +38,11 @@ pub fn render_footer(frame: &mut Frame, area: Rect, state: &AppState) {
     );
 
     frame.render_widget(footer, area);
+}
 
+pub fn render_status_popup(frame: &mut Frame, state: &AppState) {
     if let Some(msg) = &state.status_message {
-        let status_popup = Paragraph::new(msg.as_str())
+        let popup = Paragraph::new(msg.as_str())
             .style(Style::default().fg(Color::Yellow))
             .block(
                 Block::default()
@@ -49,12 +51,12 @@ pub fn render_footer(frame: &mut Frame, area: Rect, state: &AppState) {
                     .border_style(Style::default().fg(Color::Yellow)),
             );
 
-        let popup_area = centered_rect(60, 3, area);
-        frame.render_widget(status_popup, popup_area);
+        let popup_area = centered_rect(50, 10, frame.area());
+        frame.render_widget(popup, popup_area);
     }
 
     if let Some(err) = &state.error_message {
-        let error_popup = Paragraph::new(err.as_str())
+        let popup = Paragraph::new(err.as_str())
             .style(Style::default().fg(Color::Red))
             .block(
                 Block::default()
@@ -63,27 +65,27 @@ pub fn render_footer(frame: &mut Frame, area: Rect, state: &AppState) {
                     .border_style(Style::default().fg(Color::Red)),
             );
 
-        let popup_area = centered_rect(60, 3, area);
-        frame.render_widget(error_popup, popup_area);
+        let popup_area = centered_rect(50, 10, frame.area());
+        frame.render_widget(popup, popup_area);
     }
 }
 
 fn centered_rect(percent_x: u16, percent_y: u16, r: Rect) -> Rect {
-    let popup_layout = ratatui::layout::Layout::default()
-        .direction(ratatui::layout::Direction::Vertical)
+    let popup_layout = Layout::default()
+        .direction(Direction::Vertical)
         .constraints([
-            ratatui::layout::Constraint::Percentage((100 - percent_y) / 2),
-            ratatui::layout::Constraint::Percentage(percent_y),
-            ratatui::layout::Constraint::Percentage((100 - percent_y) / 2),
+            Constraint::Percentage((100 - percent_y) / 2),
+            Constraint::Percentage(percent_y),
+            Constraint::Percentage((100 - percent_y) / 2),
         ])
         .split(r);
 
-    ratatui::layout::Layout::default()
-        .direction(ratatui::layout::Direction::Horizontal)
+    Layout::default()
+        .direction(Direction::Horizontal)
         .constraints([
-            ratatui::layout::Constraint::Percentage((100 - percent_x) / 2),
-            ratatui::layout::Constraint::Percentage(percent_x),
-            ratatui::layout::Constraint::Percentage((100 - percent_x) / 2),
+            Constraint::Percentage((100 - percent_x) / 2),
+            Constraint::Percentage(percent_x),
+            Constraint::Percentage((100 - percent_x) / 2),
         ])
         .split(popup_layout[1])[1]
 }

@@ -3,7 +3,6 @@ use std::time::Duration;
 use super::format::format_duration;
 use super::playlist::Playlist;
 use super::state::PlayerState;
-use crate::ui::components::AudioVisualizer;
 
 #[derive(Debug)]
 pub struct AppState {
@@ -17,7 +16,6 @@ pub struct AppState {
     pub status_message: Option<String>,
     pub status_time: Option<std::time::Instant>,
     pub error_message: Option<String>,
-    pub visualizer: AudioVisualizer,
 }
 
 impl AppState {
@@ -33,7 +31,6 @@ impl AppState {
             status_message: None,
             status_time: None,
             error_message: None,
-            visualizer: AudioVisualizer::new(32),
         }
     }
 
