@@ -9,9 +9,6 @@ use tokio::sync::Mutex;
 use super::command::AudioCommand;
 use super::player::PlayerProcess;
 
-use nix::sys::signal::{kill, Signal};
-use nix::unistd::Pid;
-
 pub fn audio_thread(
     mut command_rx: mpsc::UnboundedReceiver<AudioCommand>,
     is_playing: Arc<AtomicBool>,
@@ -22,7 +19,7 @@ pub fn audio_thread(
     loop {
         if let Some(ref mut p) = player {
             if !p.paused {
-                let current = p.start_time.elapsed();
+                let current = p.current_elapsed();
                 *elapsed.blocking_lock() = current;
             }
         }
@@ -56,20 +53,14 @@ pub fn audio_thread(
                 }
                 AudioCommand::Pause => {
                     if let Some(ref mut p) = player {
-                        if !p.paused {
-                            let _ = kill(Pid::from_raw(p.child.id() as i32), Signal::SIGSTOP);
-                            p.paused = true;
-                            is_playing.store(false, Ordering::SeqCst);
-                        }
+                        p.pause();
+                        is_playing.store(false, Ordering::SeqCst);
                     }
                 }
                 AudioCommand::Resume => {
                     if let Some(ref mut p) = player {
-                        if p.paused {
-                            let _ = kill(Pid::from_raw(p.child.id() as i32), Signal::SIGCONT);
-                            p.paused = false;
-                            is_playing.store(true, Ordering::SeqCst);
-                        }
+                        p.resume();
+                        is_playing.store(true, Ordering::SeqCst);
                     }
                 }
                 AudioCommand::Stop => {

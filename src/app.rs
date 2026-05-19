@@ -139,6 +139,8 @@ impl App {
     }
 
     pub fn update_audio_state(&mut self) {
+        self.state.visualizer.update(self.state.player_state == PlayerState::Playing);
+
         if self.state.player_state == PlayerState::Playing {
             let elapsed = *self.audio.elapsed.blocking_lock();
             self.state.elapsed = elapsed;
