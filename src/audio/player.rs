@@ -13,7 +13,7 @@ impl PlayerProcess {
             child,
             elapsed: std::time::Duration::ZERO,
             paused: false,
-            pause_start: None,
+            pause_start: Some(std::time::Instant::now()),
         }
     }
 
