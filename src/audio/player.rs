@@ -47,6 +47,7 @@ impl PlayerProcess {
                 self.elapsed += pause_start.elapsed();
             }
             self.paused = false;
+            self.pause_start = Some(std::time::Instant::now());
         }
     }
 
