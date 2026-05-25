@@ -22,7 +22,7 @@ Um player de música TUI moderno feito com [Ratatui](https://ratatui.rs/).
 - [Rust](https://www.rust-lang.org/) (edition 2021)
 - [FFmpeg](https://ffmpeg.org/) — `ffplay` e `ffprobe` precisam estar disponíveis no `$PATH`
 
-## Instalação
+## Instalação e execução
 
 ```bash
 git clone https://github.com/brafael1/Ressonance.git
